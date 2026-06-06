@@ -13,6 +13,9 @@ export default function Navbar() {
     { label: "Pricing", href: "/pricing" },
   ];
 
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
   return (
     <div className="sticky top-0 z-50 px-3 py-4 sm:px-4 lg:px-6">
       <nav className="mx-auto rounded-2xl border border-white/10 bg-[#121212]/90 backdrop-blur-xl">
@@ -48,13 +51,13 @@ export default function Navbar() {
               >
                 Sign In
               </Link>
-
+              <Link  href="/signUp">
               <Button
-                radius="md"
-                className="bg-indigo-600 px-5 lg:px-6 text-white hover:bg-indigo-500"
-              >
-                Get Started
-              </Button>
+               radius="md"
+               className="bg-indigo-600 px-5 lg:px-6 text-white hover:bg-indigo-500">
+               Get Started
+             </Button>
+              </Link>
             </div>
           </div>
 
@@ -119,12 +122,14 @@ export default function Navbar() {
                   Sign In
                 </Link>
 
-                <Button
+                <Link
+                 href="/signUp"
                   className="w-full bg-indigo-600 text-white"
                   radius="md"
+                  onPress={() => setIsMenuOpen(false)}
                 >
                   Get Started
-                </Button>
+                </Link>
               </div>
             </div>
           </div>
