@@ -10,6 +10,15 @@ export const auth = betterAuth({
       emailAndPassword: { 
     enabled: true, 
   }, 
+
+  user: {
+       additionalFields: {
+          role: {
+              
+              defaultValue: "seeker",
+            } 
+        }
+    },
   baseURL: process.env.BETTER_AUTH_URL,
   socialProviders: {
         google: { 

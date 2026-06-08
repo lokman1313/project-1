@@ -64,7 +64,7 @@ export default function Navbar() {
                   Sign In
                 </NextLink>
 
-                <NextLink href="/signup">
+                <NextLink href="/signUp">
                   <Button className="bg-indigo-600 text-white hover:bg-indigo-500">
                     Get Started
                   </Button>
@@ -145,7 +145,7 @@ export default function Navbar() {
       </NextLink>
 
       <NextLink
-        href="/signup"
+        href="/signUp"
         onClick={() => setIsMenuOpen(false)}
       >
         <Button className="w-full bg-indigo-600 text-white">
