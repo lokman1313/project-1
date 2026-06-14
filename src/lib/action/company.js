@@ -1,15 +1,19 @@
 "use server"
 
+import { serverMutetion } from "../core/server"
 
-const baseurl = process.env.NEXT_PUBLIC_BACKEND_URL
 
-const creatCompany=async(newcompany)=>{
-    const res = await fetch(`${baseurl}/company`,{
-        method : "POST",
-        headers : {
-            "Content-Type": "application/json"
-        },
-        body : JSON.stringify(newcompany)
-    })
-    return res.json()
-}
+ export const creatCompany=async(newcompany)=>{
+    return serverMutetion("/company",newcompany)
+ }
+ 
+// export const creatCompany=async(newcompany)=>{
+//     const res = await fetch(`${baseurl}/company`,{
+//         method : "POST",
+//         headers : {
+//             "Content-Type": "application/json"
+//         },
+//         body : JSON.stringify(newcompany)
+//     })
+//     return res.json()
+// }
