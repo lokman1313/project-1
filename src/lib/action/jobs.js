@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-const baseurl = process.env.BACKEND_URL
+const baseurl = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export const creatJobs =async(jobData)=>{
     const res = fetch(`${baseurl}/jobs`,{
