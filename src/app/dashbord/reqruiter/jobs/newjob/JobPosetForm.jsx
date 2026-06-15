@@ -22,23 +22,23 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 import { creatJobs } from "@/lib/action/jobs";
 
-export default function PostJobPosetForm() {
-  const [mockCompany] = useState({
-    name: "Acme Corp (Auto-filled)",
-    id: "company_123",
-    isApproved: true,
-  });
-
+export default function PostJobPosetForm({company}) {
+  // const [mockCompany] = useState({
+  //   name: "Acme Corp (Auto-filled)",
+  //   id: "company_123",
+  //   isApproved: true,
+  // });
+console.log(company)
   const [isRemote, setIsRemote] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!mockCompany.isApproved) {
-      toast.error("Company must be approved first");
-      return;
-    }
+    // if (!mockCompany.isApproved) {
+    //   toast.error("Company must be approved first");
+    //   return;
+    // }
     const formData = new FormData(e.currentTarget);
     
     if (isRemote) {
@@ -89,7 +89,9 @@ export default function PostJobPosetForm() {
     const payload = {
       ...data,
       isRemote,
-      companyId: mockCompany.id,
+      companyId: company._id,
+      companyName: company.name,
+      companyLogo: company.logo,
       status: "active",
       isPubliclyVisible: true,
     };
@@ -127,7 +129,7 @@ export default function PostJobPosetForm() {
             <FiBriefcase />
             Posting as:
             <span className="text-zinc-200">
-              {mockCompany.name}
+              {company.name}
             </span>
           </div>
 

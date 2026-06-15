@@ -168,7 +168,7 @@ export default function CompanySection({ reqruiter, requiterCompany }) {
   };
 
   // --- ভিউ ১: কোনো কোম্পানি ডাটা নেই এবং এডিট মোডও অফ ---
-  if (!company && !isEditing) {
+  if (!company?._id && !isEditing) {
     return (
       <div className="p-6 min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
         <div className="w-full max-w-2xl mx-auto rounded-3xl border border-neutral-800/80 bg-gradient-to-b from-neutral-900 via-[#111111] to-[#0a0a0a] p-8 shadow-2xl sm:p-12">
@@ -327,6 +327,7 @@ export default function CompanySection({ reqruiter, requiterCompany }) {
                 >
                   <option value="Technology">Technology</option>
                   <option value="Finance">Finance</option>
+                  <option value="Design">Design</option>
                   <option value="Healthcare">Healthcare</option>
                   <option value="Education">Education</option>
                 </select>

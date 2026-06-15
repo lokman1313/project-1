@@ -10,6 +10,7 @@ const statusColorMap = {
 };
 
 export default function JobsTable({ jobs }) {
+  console.log(jobs)
   return (
     <Table>
       <Table.ScrollContainer>
