@@ -15,11 +15,13 @@ import {
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignUp = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const searchParams= useSearchParams().get("redirect") || "/"
+  const router =useRouter()
 
   // Email/Password Sign Up
   const handleSubmit = async (e) => {
@@ -34,7 +36,7 @@ const SignUp = () => {
       email,
       password,
       role,
-      callbackURL: "/",
+      
     });
 
     setLoading(false);
@@ -44,7 +46,7 @@ const SignUp = () => {
       return;
     }
     else if(data){
-      redirect("/")
+      router.push(searchParams)
     }
   };
 
@@ -52,7 +54,7 @@ const SignUp = () => {
   const handleGoogleSignUp = async () => {
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: searchParams,
     });
 
     if (error) {
@@ -185,7 +187,7 @@ const SignUp = () => {
           <p className="text-center text-sm text-default-500 mt-6">
             Already have an account?{" "}
             <Link
-              href="/signin"
+              href={`/signin?redirect=${searchParams}`}
               className="text-primary font-medium hover:underline"
             >
               Sign In

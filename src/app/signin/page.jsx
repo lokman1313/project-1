@@ -12,10 +12,11 @@ import {
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SignInPage = () => {
   const redirectPath = useSearchParams().get("redirect") || "/";
+  const router =useRouter()
   const [isVisible, setIsVisible] = useState(false);
 
   const handelSignIn = async () => {
@@ -40,15 +41,17 @@ const SignInPage = () => {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: redirectPath,
+      
     });
 
     if (error) {
       console.error(error);
       return;
     }
+    if(data){
+      router.push(redirectPath)
+    }
 
-    console.log(data);
   };
 
   return (
@@ -139,7 +142,7 @@ const SignInPage = () => {
           <p className="text-center text-sm text-default-500 mt-6">
             Don't have an account?{" "}
             <Link
-              href="/signUp"
+              href={`/signUp?redirect=${redirectPath}`}
               className="text-primary font-medium hover:underline"
             >
               Sign Up
