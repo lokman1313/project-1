@@ -11,10 +11,12 @@ import {
   FaCrown,
   FaArrowRight,
 } from "react-icons/fa";
+import Link from "next/link";
 
 const rolePlans = {
   seeker: [
     {
+      id: "seeker_free",
       name: "Free",
       price: 0,
       icon: <FaUserGraduate />,
@@ -26,8 +28,10 @@ const rolePlans = {
         "Email alerts",
       ],
       featured: false,
+      ctaText: "Get Started",
     },
     {
+      id: "seeker_pro",
       name: "Pro",
       price: 19,
       icon: <FaRocket />,
@@ -39,8 +43,10 @@ const rolePlans = {
         "Salary insights",
       ],
       featured: true,
+      ctaText: "Upgrade to Pro",
     },
     {
+      id: "seeker_premium",
       name: "Premium",
       price: 39,
       icon: <FaCrown />,
@@ -53,10 +59,12 @@ const rolePlans = {
         "Priority support",
       ],
       featured: false,
+      ctaText: "Go Premium",
     },
   ],
   recruiter: [
     {
+      id: "recruiter_free",
       name: "Free",
       price: 0,
       icon: <FaBriefcase />,
@@ -68,8 +76,10 @@ const rolePlans = {
         "Standard visibility",
       ],
       featured: false,
+      ctaText: "Start Free Posting",
     },
     {
+      id: "recruiter_growth",
       name: "Growth",
       price: 49,
       icon: <FaRocket />,
@@ -81,8 +91,10 @@ const rolePlans = {
         "Email support",
       ],
       featured: true,
+      ctaText: "Scale Your Hiring",
     },
     {
+      id: "recruiter_enterprise",
       name: "Enterprise",
       price: 149,
       icon: <FaCrown />,
@@ -96,13 +108,13 @@ const rolePlans = {
         "Priority support",
       ],
       featured: false,
+      ctaText: "Contact Corporate",
     },
   ],
 };
 
 export default function PricingSection() {
   const [role, setRole] = useState("seeker");
-
   const currentPlans = rolePlans[role];
 
   return (
@@ -136,7 +148,7 @@ export default function PricingSection() {
           <div className="flex items-center rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-md">
             <button
               onClick={() => setRole("seeker")}
-              className={`rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 ${
+              className={`rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 disabled:opacity-50 ${
                 role === "seeker"
                   ? "bg-white text-black shadow-sm"
                   : "text-gray-400 hover:text-white"
@@ -147,7 +159,7 @@ export default function PricingSection() {
 
             <button
               onClick={() => setRole("recruiter")}
-              className={`rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 ${
+              className={`rounded-full px-6 py-2 text-sm font-medium transition-all duration-300 disabled:opacity-50 ${
                 role === "recruiter"
                   ? "bg-white text-black shadow-sm"
                   : "text-gray-400 hover:text-white"
@@ -163,7 +175,7 @@ export default function PricingSection() {
           {currentPlans.map((plan) => {
             return (
               <div
-                key={plan.name}
+                key={plan.id || plan.name}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
                   plan.featured
                     ? "border-violet-500/30 bg-white/[0.07] shadow-[0_0_40px_rgba(139,92,246,0.15)]"
@@ -198,9 +210,7 @@ export default function PricingSection() {
                 {/* Price */}
                 <div className="relative z-10 mt-8">
                   <div className="flex items-start">
-                    <span className="text-5xl font-bold">
-                      ${plan.price}
-                    </span>
+                    <span className="text-5xl font-bold">${plan.price}</span>
                     <span className="ml-2 mt-2 text-sm text-gray-400">
                       /month
                     </span>
@@ -210,19 +220,24 @@ export default function PricingSection() {
                 {/* Features List */}
                 <ul className="mt-8 flex-1 space-y-3">
                   {plan.features.map((feature, idx) => {
-                    // Check if feature contains a cross '✗'
                     const isUnsupported = feature.includes("✗");
 
                     return (
                       <li
                         key={idx}
                         className={`flex items-center gap-3 text-sm ${
-                          isUnsupported ? "text-gray-500 line-through decoration-white/10" : "text-gray-300"
+                          isUnsupported
+                            ? "text-gray-500 line-through decoration-white/10"
+                            : "text-gray-300"
                         }`}
                       >
-                        <div className={`flex h-5 w-5 items-center justify-center rounded-full ${
-                          isUnsupported ? "bg-white/5 text-gray-500" : "bg-white/10"
-                        }`}>
+                        <div
+                          className={`flex h-5 w-5 items-center justify-center rounded-full ${
+                            isUnsupported
+                              ? "bg-white/5 text-gray-500"
+                              : "bg-white/10"
+                          }`}
+                        >
                           {isUnsupported ? (
                             <FaTimes className="text-[10px]" />
                           ) : (
@@ -237,19 +252,33 @@ export default function PricingSection() {
                 </ul>
 
                 {/* CTA Button */}
-                <Button
-                  radius="full"
-                  className={`mt-8 h-12 w-full font-medium ${
-                    plan.featured
-                      ? "bg-white text-black"
-                      : "bg-white/10 text-white"
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    Choose This Plan
-                    <FaArrowRight />
-                  </span>
-                </Button>
+                {plan.price === 0 ? (
+                  <Link
+                    href="/"
+                    className={`mt-8 flex h-12 w-full items-center justify-center rounded-xl font-medium transition-colors ${
+                      plan.featured
+                        ? "bg-white text-black"
+                        : "bg-white/10 text-white"
+                    }`}
+                  >
+                    {plan.ctaText}
+                  </Link>
+                ) : (
+                  <form action="/api/checkout_sessions" method="POST">
+                    <input type="hidden" name="plan_id" value={plan.id} />
+                    <Button
+                      type="submit"
+                      role="link"
+                      className={`mt-8 h-12 w-full font-medium ${
+                        plan.featured
+                          ? "bg-white text-black"
+                          : "bg-white/10 text-white"
+                      }`}
+                    >
+                      {plan.ctaText}
+                    </Button>
+                  </form>
+                )}
               </div>
             );
           })}

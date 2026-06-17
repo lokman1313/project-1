@@ -38,7 +38,9 @@ export default function JobApplyForm({ job, applicant }) {
       applicantId:applicant?.id,
       jobId: job?._id,
       jobTitle: job?.jobTitle,
-      companyName : job?.companyName
+      companyName : job?.companyName,
+      companyLogo : job?.companyLogo,
+      status : "applied"
     };
     const res =await creatApplication(data)
     console.log(data);

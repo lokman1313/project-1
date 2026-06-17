@@ -11,43 +11,39 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { Button, Drawer } from "@heroui/react";
-import { FaRegBuilding } from "react-icons/fa";
+import { FaBookmark, FaCog, FaCreditCard, FaFileAlt, FaHome, FaRegBuilding, FaSearch } from "react-icons/fa";
+import { authClient } from "@/lib/auth-client";
 
 
 
 export function DashbordSidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
-  const navItems = [
-    {
-      icon: FiHome,
-      href: "/dashbord/reqruiter",
-      label: "Home",
-    },
-    {
-      icon: FiBriefcase,
-      href: "/dashbord/reqruiter/jobs",
-      label: "Jobs",
-    },
-    {
-      icon: FiPlusCircle,
-      href: "/dashbord/reqruiter/jobs/newjob",
-      label: "Add New Job",
-    },
-    {
-      icon: FaRegBuilding,
-      href: "/dashbord/reqruiter/company",
-      label: "Company",
-    },
-    {
-      icon: FiUser,
-      href: "/dashbord/reqruiter/profile",
-      label: "Profile",
-    },
+ const recruiterNavlinks =[
+  {icon: FiHome, href: "/dashbord/reqruiter", label: "Home",},
+    {icon: FiBriefcase,href: "/dashbord/reqruiter/jobs",label: "Jobs",},
+    {icon: FiPlusCircle,href: "/dashbord/reqruiter/jobs/newjob", label: "Add New Job",},
+    {icon: FaRegBuilding,href: "/dashbord/reqruiter/company",label: "Company",},
+    { icon: FiUser, href: "/dashbord/reqruiter/profile", label: "Profile", },
   
+ ]
+  const seekerNavLinks = [
+    { icon: FaHome, href: "/dashbord/seeker", label: "Dashboard" },
+    { icon: FaSearch, href: "/dashbord/seeker/jobs", label: "Jobs" },
+    { icon: FaBookmark, href: "/dashbord/seeker/saved-jobs", label: "Saved Jobs" },
+    { icon: FaFileAlt, href: "/dashbord/seeker/applications", label: "Applications" },
+    { icon: FaCreditCard, href: "/dashbord/seeker/billing", label: "Billing" },
+    { icon: FaCog, href: "/settings", label: "Settings" },
   ];
 
+  const navlinks = {
+    seeker : seekerNavLinks,
+    recruiter : recruiterNavlinks
+  }
+  const navItems = navlinks[user?.role || "seeker"];
   const navContent = (
     <nav className="flex flex-col gap-1">
       {navItems.map((item) => {

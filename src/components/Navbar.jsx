@@ -9,6 +9,8 @@ import logo from "../../public/logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
   const navItems = [
     { label: "Browse Jobs", href: "/jobs" },
@@ -16,8 +18,16 @@ export default function Navbar() {
     { label: "Pricing", href: "/pricing" },
   ];
 
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
+  const dashboardLinks ={
+    seeker: "/dashbord/seeker",
+    recruiter: "/dashbord/reqruiter"
+  }
+
+  if(user?.email){
+    navItems.push({
+      label: "Dashboard", href: dashboardLinks[user.role || "seeker"]
+    })
+  }
 
   return (
     <header className="sticky top-0 z-50 px-3 py-4 sm:px-4 lg:px-6">

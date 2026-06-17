@@ -27,16 +27,18 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     const formData = new FormData(e.currentTarget);
     const { name, email, password ,role} = Object.fromEntries(formData.entries());
+    const plan = role === 'seeker' ? 'seeker_free' : 'recruiter_free';
+
 
     const { data, error } = await authClient.signUp.email({
       name,
       email,
       password,
       role,
-      
+      plan
     });
 
     setLoading(false);

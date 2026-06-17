@@ -1,24 +1,33 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
+import { PLAN_PRICE_ID, stripe } from '@/lib/stripe';
+import { userSession } from '@/lib/core/session';
 
-import { stripe } from '../../../lib/stripe'
 
-export async function POST() {
+
+export async function POST(request) {
   try {
     const headersList = await headers()
     const origin = headersList.get('origin')
+    const formData = await request.formData()
+    const planId = formData.get("plan_id")
+    const priceId = PLAN_PRICE_ID[planId]
+
+    const user = await userSession()
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
+      customer_email: user.email,
       line_items: [
         {
           // Provide the exact Price ID (for example, price_1234) of the product you want to sell
-          price: '{{PRICE_ID}}',
+          price: priceId,
           quantity: 1,
         },
       ],
       mode: 'subscription',
-      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      metadata :{ planId },
+      success_url: `${origin}/pricing/success?session_id={CHECKOUT_SESSION_ID}`,
     });
     return NextResponse.redirect(session.url, 303)
   } catch (err) {

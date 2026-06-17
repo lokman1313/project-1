@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 import JobApplyForm from './JobApplyForm';
 import { getApplicationById } from '@/lib/api/application';
+import { getPlansId } from '@/lib/api/plans';
 
 const ApplyPage = async ({ params }) => {
     const user = await userSession();
@@ -34,15 +35,13 @@ const ApplyPage = async ({ params }) => {
     }
 
     const applications = await getApplicationById(user?.id);
-    const plan = {
-        name: "Free Plan",
-        maxApplyPerMonth: 3
-    };
-    
+    const plan = await getPlansId(user?.plan || "seeker_free")
+    console.log(user)
+    console.log(plan)
     const job = await getJobById(id);
     const applicationCount = applications?.length || 0;
-    const hasReachedLimit = applicationCount >= plan.maxApplyPerMonth;
-    const progressPercentage = Math.min((applicationCount / plan.maxApplyPerMonth) * 100, 100);
+    const hasReachedLimit = applicationCount >= plan.maxPerMonth;
+    const progressPercentage = Math.min((applicationCount / plan.maxPerMonth) * 100, 100);
 
     return (
         <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 text-slate-100">
@@ -59,7 +58,7 @@ const ApplyPage = async ({ params }) => {
                                 Monthly Applications Tracker
                             </h2>
                             <p className="text-sm text-slate-400 mt-1">
-                                You have used <span className="font-bold text-slate-200">{applicationCount}</span> out of <span className="font-bold text-slate-200">{plan.maxApplyPerMonth}</span> applications this month.
+                                You have used <span className="font-bold text-slate-200">{applicationCount}</span> out of <span className="font-bold text-slate-200">{plan.maxPerMonth}</span> applications this month.
                             </p>
                         </div>
                         
