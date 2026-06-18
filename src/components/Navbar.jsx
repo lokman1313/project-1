@@ -20,7 +20,8 @@ export default function Navbar() {
 
   const dashboardLinks ={
     seeker: "/dashbord/seeker",
-    recruiter: "/dashbord/reqruiter"
+    recruiter: "/dashbord/reqruiter",
+    admin : "/dashbord/admin",
   }
 
   if(user?.email){

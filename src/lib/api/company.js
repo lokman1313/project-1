@@ -1,4 +1,4 @@
-import { serverFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 import { userSession } from "../core/session"
 
 export const companyDataFetch =async(userId)=>{
@@ -9,4 +9,8 @@ export const getLoggedInReqruiter=async()=>{
     const user = await userSession()
 
     return companyDataFetch(user?.id)
+}
+
+export const getAllCompanies=async()=>{
+    return protectedFetch("/company")
 }

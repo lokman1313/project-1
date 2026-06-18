@@ -11,7 +11,7 @@ import {
   FiUser,
 } from "react-icons/fi";
 import { Button, Drawer } from "@heroui/react";
-import { FaBookmark, FaCog, FaCreditCard, FaFileAlt, FaHome, FaRegBuilding, FaSearch } from "react-icons/fa";
+import { FaBookmark, FaBriefcase, FaBuilding, FaCog, FaCreditCard, FaFileAlt, FaHome, FaRegBuilding, FaSearch, FaUsers } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 
 
@@ -32,16 +32,23 @@ export function DashbordSidebar() {
  ]
   const seekerNavLinks = [
     { icon: FaHome, href: "/dashbord/seeker", label: "Dashboard" },
-    { icon: FaSearch, href: "/dashbord/seeker/jobs", label: "Jobs" },
-    { icon: FaBookmark, href: "/dashbord/seeker/saved-jobs", label: "Saved Jobs" },
+    { icon: FaSearch, href: "/jobs", label: "Jobs" },
     { icon: FaFileAlt, href: "/dashbord/seeker/applications", label: "Applications" },
-    { icon: FaCreditCard, href: "/dashbord/seeker/billing", label: "Billing" },
     { icon: FaCog, href: "/settings", label: "Settings" },
   ];
+  const adminNavLinks = [
+  { icon: FaHome, href: "/dashbord/admin", label: "Dashboard" },
+  { icon: FaUsers, href: "/dashbord/admin/users", label: "Users" },
+  { icon: FaBuilding, href: "/dashbord/admin/companies", label: "Companies" },
+  { icon: FaBriefcase, href: "/dashbord/admin/jobs", label: "Jobs" },
+  { icon: FaCreditCard, href: "/dashbord/admin/payments", label: "Payments" },
+  { icon: FaCog, href: "/dashbord/admin/settings", label: "Settings" },
+];
 
   const navlinks = {
     seeker : seekerNavLinks,
-    recruiter : recruiterNavlinks
+    recruiter : recruiterNavlinks,
+    admin : adminNavLinks
   }
   const navItems = navlinks[user?.role || "seeker"];
   const navContent = (

@@ -13,6 +13,7 @@ import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const redirectPath = useSearchParams().get("redirect") || "/";
@@ -45,7 +46,7 @@ const SignInPage = () => {
     });
 
     if (error) {
-      console.error(error);
+      toast.error(error.message)
       return;
     }
     if(data){
