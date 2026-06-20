@@ -16,7 +16,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 " />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4">
-        <div className="flex min-h-screen flex-col items-center justify-center py-20">
+        <div className="flex min-h-screen flex-col items-center justify-center py-10">
 
           {/* Badge */}
           <motion.div

@@ -19,7 +19,7 @@ const stats = [
 
 export default function GlobeSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black">
+    <section className="relative min-h-screen overflow-hidden ">
 
       {/* Globe Background */}
       <motion.div
