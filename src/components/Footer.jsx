@@ -11,8 +11,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-6">
             <h2 className="text-4xl font-bold">
-              <span className="text-blue-500">hire</span>
-              <span className="text-orange-500">loop</span>
+              <span >Job</span>
+              <span className="text-cyan-600">Finder</span>
             </h2>
 
             <p className="max-w-xs text-sm leading-7 text-gray-500">

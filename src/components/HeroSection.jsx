@@ -50,7 +50,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              HireLoop connects top talent
+              JobFinder connects top talent
             </motion.p>
 
             <motion.p
@@ -92,7 +92,7 @@ export default function HeroSection() {
                 color="primary"
                 size="lg"
                 radius="lg"
-                className="w-full px-8 font-semibold md:w-auto"
+                className="w-full px-8 font-semibold md:w-auto bg-cyan-600"
               >
                 <FaSearch />
                 Search Jobs

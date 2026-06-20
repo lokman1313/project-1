@@ -36,8 +36,9 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
 
           {/* Logo */}
-          <NextLink href="/" className="flex items-center">
-            <Image src={logo} alt="Logo" width={140} height={40} />
+          <NextLink href="/" className="flex items-center justify-center gap-2">
+            <Image src={logo} alt="Logo" width={50} height={50} />
+            <h2 className="text-3xl font-bold "><span>Job</span><span className="text-cyan-600">Finder</span></h2>
           </NextLink>
 
           {/* Desktop Menu */}
@@ -70,13 +71,13 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <NextLink
                   href="/signin"
-                  className="text-sm text-indigo-400 hover:text-indigo-300"
+                  className="text-sm font-bold text-cyan-600 hover:text-indigo-300"
                 >
                   Sign In
                 </NextLink>
 
                 <NextLink href="/signUp">
-                  <Button className="bg-indigo-600 text-white hover:bg-indigo-500">
+                  <Button className="bg-cyan-600 text-white hover:bg-indigo-500">
                     Get Started
                   </Button>
                 </NextLink>
