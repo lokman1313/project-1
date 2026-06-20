@@ -13,7 +13,7 @@ const trendingTags = [
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden text-white">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
+      <div className="absolute inset-0 " />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4">
         <div className="flex min-h-screen flex-col items-center justify-center py-20">
@@ -39,7 +39,7 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-8 max-w-5xl text-center text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Find Your Dream Job Today
+            Find Your Dream <br /><span className="text-cyan-600">Job Today</span>
           </motion.h1>
 
           {/* Paragraph (left + right split animation) */}
