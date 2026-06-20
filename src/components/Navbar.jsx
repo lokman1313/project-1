@@ -13,7 +13,7 @@ export default function Navbar() {
   const user = session?.user;
 
   const navItems = [
-    { label: "Browse Jobs", href: "/jobs" },
+    { label: "Browse Jobs", href: "/jobs?page=1" },
     { label: "Company", href: "/company" },
     { label: "Pricing", href: "/pricing" },
   ];

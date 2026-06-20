@@ -12,11 +12,12 @@ const trendingTags = [
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden text-white">
-      <div className="absolute inset-0 " />
+    <section className="relative overflow-hidden py-10 text-white">
+      {/* No background here — particles from GlobeSection show through */}
+      <div className="absolute inset-0" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4">
-        <div className="flex min-h-screen flex-col items-center justify-center py-10">
+        <div className="flex flex-col items-center justify-center py-10">
 
           {/* Badge */}
           <motion.div
@@ -39,10 +40,11 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-8 max-w-5xl text-center text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Find Your Dream <br /><span className="text-cyan-600">Job Today</span>
+            Find Your Dream <br />
+            <span className="text-cyan-600">Job Today</span>
           </motion.h1>
 
-          {/* Paragraph (left + right split animation) */}
+          {/* Paragraph */}
           <div className="mx-auto mt-6 max-w-2xl text-center text-gray-400 md:text-lg">
             <motion.p
               initial={{ opacity: 0, x: -60 }}
@@ -57,11 +59,10 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              with world-class companies. Browse thousands of curated opportunities
-              and discover your next career move faster.
+              with world-class companies. Browse thousands of curated
+              opportunities and discover your next career move faster.
             </motion.p>
           </div>
-
 
           {/* Trending Tags */}
           <motion.div
