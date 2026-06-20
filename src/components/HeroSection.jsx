@@ -1,7 +1,6 @@
 "use client";
 
-import { Button, Input } from "@heroui/react";
-import { FaSearch, FaFire } from "react-icons/fa";
+import { FaFire } from "react-icons/fa";
 import { motion } from "motion/react";
 
 const trendingTags = [
@@ -63,43 +62,6 @@ export default function HeroSection() {
             </motion.p>
           </div>
 
-          {/* Search Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-10 w-full max-w-5xl rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl"
-          >
-            <div className="flex flex-col gap-4 md:flex-row">
-
-              <Input
-                size="lg"
-                radius="lg"
-                variant="bordered"
-                placeholder="Job title, skill, or company"
-                className="w-full md:flex-1"
-              />
-
-              <Input
-                size="lg"
-                radius="lg"
-                variant="bordered"
-                placeholder="Location or Remote"
-                className="w-full md:max-w-xs"
-              />
-
-              <Button
-                color="primary"
-                size="lg"
-                radius="lg"
-                className="w-full px-8 font-semibold md:w-auto bg-cyan-600"
-              >
-                <FaSearch />
-                Search Jobs
-              </Button>
-
-            </div>
-          </motion.div>
 
           {/* Trending Tags */}
           <motion.div
