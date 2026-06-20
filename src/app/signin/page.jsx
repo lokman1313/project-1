@@ -15,9 +15,11 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
-const SignInPage = () => {
-  const redirectPath = useSearchParams().get("redirect") || "/";
-  const router =useRouter()
+const SignInClient = () => {
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/";
+
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   const handelSignIn = async () => {
@@ -26,9 +28,7 @@ const SignInPage = () => {
       callbackURL: redirectPath,
     });
 
-    if (error) {
-      console.error(error);
-    }
+    if (error) console.error(error);
   };
 
   const handelSubmit = async (e) => {
@@ -42,21 +42,20 @@ const SignInPage = () => {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      
     });
 
     if (error) {
-      toast.error(error.message)
+      toast.error(error.message);
       return;
     }
-    if(data){
-      router.push(redirectPath)
-    }
 
+    if (data) {
+      router.push(redirectPath);
+    }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-10 bg-background">
+     <section className="min-h-screen flex items-center justify-center px-4 py-10 bg-background">
       <div className="w-full max-w-md rounded-2xl border border-default-200 bg-content1 shadow-lg">
         <div className="p-8">
           <div className="mb-8 text-center">
@@ -155,4 +154,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignInClient;
