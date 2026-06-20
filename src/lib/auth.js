@@ -30,9 +30,7 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_SECRET 
         }
       },
-       plugins: [
-        admin() 
-    ],
+
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
