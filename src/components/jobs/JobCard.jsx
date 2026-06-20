@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Link } from "@heroui/react";
-// Replaced react-icons/fa6 with react-icons/fa
 import { FaMapMarkerAlt, FaBriefcase, FaDollarSign, FaArrowRight } from "react-icons/fa";
 
 export default function JobCard({ job }) {
@@ -15,7 +14,7 @@ export default function JobCard({ job }) {
   };
 
   const salaryRange = job.minSalary && job.maxSalary
-    ? `$${formatSalary(job.minSalary)}–$${formatSalary(job.maxSalary)} / month`
+    ? `$${formatSalary(job.minSalary)}-$${formatSalary(job.maxSalary)} / month`
     : "Salary Negotiable";
 
   // Safely extract the ID string depending on your MongoDB data hydration setup
@@ -94,7 +93,7 @@ export default function JobCard({ job }) {
         {(job.requirements || job.benefits) && (
           <div className="text-xs text-zinc-500 space-y-1 border-t border-zinc-800/60 pt-3">
             {job.requirements && (
-              <p><strong className="text-zinc-400">Requirements:</strong> {job.requirements}</p>
+              <p className="line-clamp-2"><strong className="text-zinc-400">Requirements:</strong> {job.requirements}</p>
             )}
             {job.benefits && (
               <p><strong className="text-zinc-400">Benefits:</strong> {job.benefits}</p>

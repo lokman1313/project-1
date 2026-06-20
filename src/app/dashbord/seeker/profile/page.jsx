@@ -1,7 +1,7 @@
 import { userSession } from "@/lib/core/session";
 import React from "react";
 
-const RecruiterProfilePage = async () => {
+const ProfilePage = async () => {
   const user = await userSession();
 
   if (!user) {
@@ -18,7 +18,7 @@ const RecruiterProfilePage = async () => {
         
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold">
+          <div className="w-14 h-14 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xl font-bold">
             {user.name?.charAt(0)?.toUpperCase()}
           </div>
 
@@ -30,15 +30,13 @@ const RecruiterProfilePage = async () => {
           </div>
         </div>
 
-        {/* Badge */}
-        <div className="mb-6">
-          <span className="px-3 py-1 text-xs rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 capitalize">
-            {user.role}
-          </span>
-        </div>
-
         {/* Info */}
         <div className="space-y-3 text-sm">
+          <div className="flex justify-between border-b border-zinc-800 pb-2">
+            <span className="text-zinc-400">Role</span>
+            <span className="text-white capitalize">{user.role}</span>
+          </div>
+
           <div className="flex justify-between border-b border-zinc-800 pb-2">
             <span className="text-zinc-400">Plan</span>
             <span className="text-white capitalize">{user.plan}</span>
@@ -71,16 +69,9 @@ const RecruiterProfilePage = async () => {
             </span>
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="mt-6 pt-4 border-t border-zinc-800">
-          <p className="text-xs text-zinc-500 text-center">
-            Recruiter Dashboard Profile
-          </p>
-        </div>
       </div>
     </div>
   );
 };
 
-export default RecruiterProfilePage;
+export default ProfilePage;

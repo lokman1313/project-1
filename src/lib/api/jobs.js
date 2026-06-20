@@ -8,8 +8,8 @@ export const getCompanyJobs=async(companyId , status = "active")=>{
     return res.json()
 }
 
-export const getJobs=async()=>{
-    return serverFetch("/all/jobs")
+export const getJobs=async(query)=>{
+    return serverFetch(`/all/jobs?${query}`)
 }
 
 export const getJobById=async(id)=>{

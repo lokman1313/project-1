@@ -34,7 +34,7 @@ export function DashbordSidebar() {
     { icon: FaHome, href: "/dashbord/seeker", label: "Dashboard" },
     { icon: FaSearch, href: "/jobs", label: "Jobs" },
     { icon: FaFileAlt, href: "/dashbord/seeker/applications", label: "Applications" },
-    { icon: FaCog, href: "/settings", label: "Settings" },
+    { icon: FiUser, href: "/dashbord/seeker/profile", label: "Profile" },
   ];
   const adminNavLinks = [
   { icon: FaHome, href: "/dashbord/admin", label: "Dashboard" },
