@@ -5,7 +5,7 @@ import ParticlesBackground from "@/components/ParticlesBackground";
 
 export default function Home() {
   return (
-    <div style={{ position: "relative", background: "#0f0f1a" }}>
+    <div className="relative">
       {/* Particles runs across the full page */}
       <ParticlesBackground />
 
