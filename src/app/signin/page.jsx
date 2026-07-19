@@ -28,7 +28,9 @@ const SignInClient = () => {
       callbackURL: redirectPath,
     });
 
-    if (error) console.error(error);
+    if (error) {
+      // safe fallback
+    }
   };
 
   const handelSubmit = async (e) => {

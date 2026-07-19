@@ -20,16 +20,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 const SignUp = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const searchParams= useSearchParams().get("redirect") || "/"
-  const router =useRouter()
+  const searchParams = useSearchParams().get("redirect") || "/"
+  const router = useRouter()
 
   // Email/Password Sign Up
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const formData = new FormData(e.currentTarget);
-    const { name, email, password ,role} = Object.fromEntries(formData.entries());
+    const { name, email, password, role } = Object.fromEntries(formData.entries());
     const plan = role === 'seeker' ? 'seeker_free' : 'recruiter_free';
 
 
@@ -44,10 +44,9 @@ const SignUp = () => {
     setLoading(false);
 
     if (error) {
-      console.error(error);
       return;
     }
-    else if(data){
+    else if (data) {
       router.push(searchParams)
     }
   };
@@ -58,10 +57,6 @@ const SignUp = () => {
       provider: "google",
       callbackURL: searchParams,
     });
-
-    if (error) {
-      console.error(error);
-    }
   };
 
   return (
@@ -134,29 +129,29 @@ const SignUp = () => {
 
             {/* role group */}
             <div className="flex flex-col gap-4">
-      <Label>Your Posison</Label>
-      <RadioGroup defaultValue="seeker" name="role" orientation="horizontal">
-        <Radio value="seeker">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Job Seeker</Label>
-            
-          </Radio.Content>
-        </Radio>
-        <Radio value="recruiter">
-          <Radio.Control>
-            <Radio.Indicator />
-          </Radio.Control>
-          <Radio.Content>
-            <Label>Recruiter</Label>
-            
-          </Radio.Content>
-        </Radio>
-        
-      </RadioGroup>
-    </div>
+              <Label>Your Posison</Label>
+              <RadioGroup defaultValue="seeker" name="role" orientation="horizontal">
+                <Radio value="seeker">
+                  <Radio.Control>
+                    <Radio.Indicator />
+                  </Radio.Control>
+                  <Radio.Content>
+                    <Label>Job Seeker</Label>
+
+                  </Radio.Content>
+                </Radio>
+                <Radio value="recruiter">
+                  <Radio.Control>
+                    <Radio.Indicator />
+                  </Radio.Control>
+                  <Radio.Content>
+                    <Label>Recruiter</Label>
+
+                  </Radio.Content>
+                </Radio>
+
+              </RadioGroup>
+            </div>
 
             {/* Submit */}
             <Button

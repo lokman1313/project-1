@@ -1,11 +1,10 @@
+import { getApprovedCompanies } from "@/lib/api/company";
+import CompaniesClient from "@/components/CompaniesClient";
 
+export const dynamic = "force-dynamic";
 
-const Company = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+export default async function CompanyPage() {
+  const companies = await getApprovedCompanies();
 
-export default Company;
+  return <CompaniesClient initialCompanies={companies} />;
+}

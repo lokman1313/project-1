@@ -14,15 +14,17 @@ export const auth = betterAuth({
   user: {
        additionalFields: {
           role: {
-              
+              type: "string",
               defaultValue: "seeker",
             } ,
           plan : {
+            type: "string",
             defaultValue : "seeker_free"
           }
         }
     },
   baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [process.env.BETTER_AUTH_URL || "http://localhost:3000"],
   socialProviders: {
         google: { 
             clientId: process.env.GOOGLE_ID  ,

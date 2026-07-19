@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JobFinder Platform
 
-## Getting Started
+JobFinder is a premium, modern, and high-performance job board portal built with Next.js 16, React 19, Tailwind CSS, HeroUI, and Better Auth. It connects top talent with world-class companies through frictionless applications, active job boards, and automated subscription tracking.
 
-First, run the development server:
+## 🚀 Key Features
+
+* **Advanced Job Search & Filtering:** Live browse queries, categories, types, and remote-friendly filter toggles.
+* **Public Companies Directory:** Discover approved organizations hiring on the platform. Search and filter by industry tag.
+* **Multi-Role Dashboards:**
+  * **Seeker Dashboard:** Monthly applications tracker with plan limit checks, direct CV applications, status log.
+  * **Recruiter Dashboard:** Manage posted jobs, add new vacancies, register company credentials, verify analytics.
+  * **Admin Console:** Direct user management (change roles, suspend/activate account, delete users), list posted jobs, view payment transactions, configure settings.
+* **Subscription Tiers & Payments:** Integrated checkout session flow via Stripe, active subscription records management.
+* **Robust Auth & Recoveries:** Structured Better Auth social/email credentials, email verification flows, and **Forgot Password** self-recovery.
+
+---
+
+## 🛠️ Technology Stack
+
+* **Frontend Framework:** Next.js 16 (App Router)
+* **Library UI Component:** HeroUI (formerly NextUI) & Motion (animations)
+* **CSS System:** Tailwind CSS v4
+* **Database Driver:** MongoDB & MongoClient
+* **Authentication Adapter:** Better Auth with MongoDB Adapter
+* **Payment Gateway:** Stripe API
+
+---
+
+## 📋 Environment Variables Config
+
+Create a `.env` or `.env.local` file in your root folder and set the following parameters:
+
+```env
+# Better Auth Configurations
+BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_SECRET=your_auth_secret
+
+# MongoDB Config
+MONGODB_URI=your_mongodb_connection_string
+DB_NAME=project-1
+
+# Auth Client Credentials
+GOOGLE_ID=your_google_client_id
+GOOGLE_SECRET=your_google_client_secret
+
+# Server API Integration
+NEXT_PUBLIC_BACKEND_URL=https://project-1-backend-chi.vercel.app
+NEXT_PUBLIC_IMAGE_BB_UPLOAD_API=your_imgbb_upload_api_key
+
+# Payment Gateways
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+```
+
+---
+
+## 💻 Getting Started
+
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,6 +1,6 @@
 "use client";
 
-import { updateUserRole } from "@/lib/action/users";
+import { updateUserRole, updateUserStatus, deleteUser } from "@/lib/action/users";
 import React, { useState } from "react";
 import {
   FaUser,
@@ -8,6 +8,7 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function AdminUsersTable({ users }) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -32,7 +33,7 @@ export default function AdminUsersTable({ users }) {
   };
 
   // Safe accessor for MongoDB OID
-  const getUserId = (user) => user._id?.$oid || user.id;
+  const getUserId = (user) => user._id?.$oid || user.id || user._id;
 
   // Trigger confirmation modal instead of executing directly
   const initiateRoleChange = (userId, userName, newRole) => {
@@ -47,10 +48,15 @@ export default function AdminUsersTable({ users }) {
     setIsUpdating(true);
     try {
       const { userId, newRole } = pendingChange;
-      // Server Action runs -> updates DB -> revalidatePath updates Server Component props
-      await updateUserRole(userId, newRole);
+      const res = await updateUserRole(userId, newRole);
+      if (res.success) {
+        toast.success(`User role updated to ${newRole}`);
+      } else {
+        toast.error(res.error || "Failed to update role");
+      }
     } catch (error) {
       console.error("Failed to update user role:", error);
+      toast.error("An error occurred");
     } finally {
       setIsUpdating(false);
       setIsConfirmOpen(false);
@@ -59,11 +65,32 @@ export default function AdminUsersTable({ users }) {
   };
 
   const handleStatusChange = async (userId, newStatus) => {
-    console.log(`Status change triggered for ${userId} to ${newStatus}`);
+    try {
+      const res = await updateUserStatus(userId, newStatus);
+      if (res.success) {
+        toast.success(`User status updated to ${newStatus}`);
+      } else {
+        toast.error(res.error || "Failed to update status");
+      }
+    } catch (error) {
+      console.error("Failed to update user status:", error);
+      toast.error("An error occurred");
+    }
   };
 
   const handleDelete = async (userId) => {
-    console.log(`Delete triggered for user ${userId}`);
+    if (!confirm("Are you sure you want to delete this user?")) return;
+    try {
+      const res = await deleteUser(userId);
+      if (res.success) {
+        toast.success("User deleted successfully");
+      } else {
+        toast.error(res.error || "Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Failed to delete user:", error);
+      toast.error("An error occurred");
+    }
   };
 
   return (

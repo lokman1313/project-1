@@ -6,6 +6,9 @@ import {
   FaBuilding,
   FaFileAlt,
 } from "react-icons/fa";
+import AdminChart from "@/components/dashbordComponents/AdminChart";
+
+export const dynamic = "force-dynamic";
 
 const AdminPage = async () => {
   const data = await getUsersList();
@@ -16,13 +19,13 @@ const AdminPage = async () => {
   const seekers = users.filter((u) => u.role === "seeker").length;
 
   return (
-    <div className="space-y-8 md:p-10">
+    <div className="space-y-8 md:p-10 bg-[#09090b] min-h-screen text-zinc-100 p-6">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-white">
           Admin Dashboard
         </h1>
-        <p className="text-zinc-400 mt-1">
+        <p className="text-zinc-400 mt-1 text-sm">
           Manage users, jobs, recruiters and platform activity.
         </p>
       </div>
@@ -32,7 +35,7 @@ const AdminPage = async () => {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-zinc-400 text-sm">Total Users</p>
+              <p className="text-zinc-450 text-xs font-semibold uppercase tracking-wider">Total Users</p>
               <h2 className="text-3xl font-bold text-white mt-2">
                 {users.length}
               </h2>
@@ -47,7 +50,7 @@ const AdminPage = async () => {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-zinc-400 text-sm">Admins</p>
+              <p className="text-zinc-450 text-xs font-semibold uppercase tracking-wider">Admins</p>
               <h2 className="text-3xl font-bold text-purple-400 mt-2">
                 {admins}
               </h2>
@@ -62,7 +65,7 @@ const AdminPage = async () => {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-zinc-400 text-sm">Recruiters</p>
+              <p className="text-zinc-450 text-xs font-semibold uppercase tracking-wider">Recruiters</p>
               <h2 className="text-3xl font-bold text-blue-400 mt-2">
                 {recruiters}
               </h2>
@@ -77,7 +80,7 @@ const AdminPage = async () => {
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
           <div className="flex justify-between items-center">
             <div>
-              <p className="text-zinc-400 text-sm">Job Seekers</p>
+              <p className="text-zinc-450 text-xs font-semibold uppercase tracking-wider">Job Seekers</p>
               <h2 className="text-3xl font-bold text-emerald-400 mt-2">
                 {seekers}
               </h2>
@@ -90,6 +93,9 @@ const AdminPage = async () => {
         </div>
       </div>
 
+      {/* Recharts Graphical Chart */}
+      <AdminChart />
+
       {/* Quick Actions */}
       <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
         <h3 className="text-lg font-semibold text-white mb-5">
@@ -97,19 +103,19 @@ const AdminPage = async () => {
         </h3>
 
         <div className="grid md:grid-cols-3 gap-4">
-          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition">
+          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-750 transition text-left">
             <FaUsers className="text-indigo-400" />
-            <span className="text-zinc-200">Manage Users</span>
+            <span className="text-zinc-200 text-sm font-semibold">Manage Users</span>
           </button>
 
-          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition">
+          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-750 transition text-left">
             <FaBuilding className="text-blue-400" />
-            <span className="text-zinc-200">Manage Companies</span>
+            <span className="text-zinc-200 text-sm font-semibold">Manage Companies</span>
           </button>
 
-          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition">
+          <button className="flex items-center gap-3 p-4 rounded-xl bg-zinc-800 hover:bg-zinc-750 transition text-left">
             <FaFileAlt className="text-emerald-400" />
-            <span className="text-zinc-200">Review Applications</span>
+            <span className="text-zinc-200 text-sm font-semibold">Review Applications</span>
           </button>
         </div>
       </div>
